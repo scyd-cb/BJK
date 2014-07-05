@@ -1,0 +1,9 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}This program and the accompanying materials
+${licensePrefix}are made available for the coding challenge 
+${licensePrefix}organized by Insight.
+<#if licenseLast??>
+${licenseLast}
+</#if>

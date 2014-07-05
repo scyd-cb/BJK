@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This program and the accompanying materials
+ * are made available for the coding challenge 
+ * organized by Insight.
  */
 
 package blackjack;
