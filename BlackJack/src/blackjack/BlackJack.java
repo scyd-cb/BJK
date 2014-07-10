@@ -6,17 +6,22 @@
 
 package blackjack;
 
+import testmodule.SGL_Tests;
+
 /**
  *
  * @author Duong Steven
  */
 public class BlackJack {
 
+    private static void initParameters(int numberOfPlayer){     
+    }
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        SGL_Tests.Instance().HandSum();
     }
     
 }
