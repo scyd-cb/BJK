@@ -6,22 +6,20 @@
 
 package blackjack;
 
-import testmodule.SGL_Tests;
+import java.io.IOException;
+//import testmodule.SGL_Tests;
 
 /**
  *
  * @author Duong Steven
  */
 public class BlackJack {
-
-    private static void initParameters(int numberOfPlayer){     
-    }
-    
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
-    public static void main(String[] args) {
-        SGL_Tests.Instance().HandSum();
+    public static void main(String[] args) throws IOException {
+        SGL_GameTable.Instance().State_Machine();
     }
-    
+      
 }

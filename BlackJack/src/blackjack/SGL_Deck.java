@@ -12,11 +12,10 @@ import java.util.*;
  * @author Duong Steven
  */
 public class SGL_Deck {
-public final int BLACKJACK = 21;
 private final int NumberOfDeck = 1;
 private Random rnd;    
-private static ArrayList<CARD> CardsInDeck;
-private static EnumMap<CARD, Integer> CardsOutDeck;
+private static ArrayList<CLS_CARD.CARD> CardsInDeck;
+private static EnumMap<CLS_CARD.CARD, Integer> CardsOutDeck;
 private static SGL_Deck INSTANCE = null;
 
 // constructor
@@ -31,92 +30,57 @@ public static SGL_Deck instance(){
     return INSTANCE;
 }
 
-public enum CARD{
-    ACE(1),
-    TWO(2),
-    THREE(3),
-    FOUR(4),
-    FIVE(5),
-    SIX(6),
-    SEVEN(7),
-    EIGHT(8),
-    NINE(9),
-    TEN(10),
-    JACK(10),
-    QUEEN(10),        
-    KING(10);
+public enum HAND_STATE{
+    NONE(0),
+    SPLITTED(0),    
+    DOUBLE(0),
+    PENDING(20),
+    BLACKJACK(21),
+    SURRENDER(22),
+    BUST(22),
+    WIN(1),
+    LOOSE(2),
+    TIE(3);
     
-    CARD(int val){ this.value = val; }
+    HAND_STATE(int val){ this.value = val; }
     private final int value;
     public int value(){ return value; }
-    public String toString(){
-        String name = "";
-        switch (ordinal()) {
-            case 0:
-                name = "ACE";
-                break;
-            case 1:
-                name = "TWO";
-                break;
-            case 2:
-                name = "THREE";
-                break;
-            case 3:
-                name = "FOUR";
-                break;
-            case 4:
-                name = "FIVE";
-                break;
-            case 5:
-                name = "SIX";
-                break;
-            case 6:
-                name = "SEVEN";
-                break;
-            case 7:
-                name = "EIGHT";
-                break;
-            case 8:
-                name = "NINE";
-                break;
-            case 9:
-                name = "TEN";
-                break;
-            case 10:
-                name = "JACK";
-                break;
-            case 11:
-                name = "QUEEN";
-                break;
-            case 12:
-                name = "KING";
-                break;
-            default:
-                name = "NOTHING";
-                break;
-        }
-        return name;
-    }
-    }
+}
     
-
+/**
+ * Used to shuffle deck
+ */
 public final void resetDeck(){
     long seed = new Date().getTime();
     rnd = new Random(seed);
-    CardsInDeck = new ArrayList(Arrays.asList(CARD.values()));
-    CardsOutDeck = new EnumMap<>(CARD.class);
+    CardsInDeck = new ArrayList(Arrays.asList(CLS_CARD.CARD.values()));
+    CardsOutDeck = new EnumMap<>(CLS_CARD.CARD.class);
 }
 
-public CARD getCard(){
+/**
+ * Used to generate a random card
+ * @return 
+ */
+public CLS_CARD getCard(){
     // get a random card off the deck
     int randomNumber = rnd.nextInt(CardsInDeck.size());
-    CARD cardpicked = CardsInDeck.get(randomNumber);
+    CLS_CARD.CARD cardpicked = CardsInDeck.get(randomNumber);
     int numberOut = (CardsOutDeck.get(cardpicked) != null)? CardsOutDeck.get(cardpicked):0;
     CardsOutDeck.put(cardpicked, ++numberOut);
     
     // remove the card of the deck if the number is out of limit
     if (numberOut == NumberOfDeck*4) CardsInDeck.remove(randomNumber);
-    return cardpicked; 
+    return new CLS_CARD(cardpicked); 
+}
+
+/**
+ * Used to generate a hidden card 
+ * @return 
+ */
+public CLS_CARD getHideCard(){
+    CLS_CARD cardpicked = getCard();
+    cardpicked.Hide = CLS_CARD.HIDE;
+    return cardpicked;
 }
 
 }

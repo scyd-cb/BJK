@@ -22,51 +22,63 @@ public class SGL_Tests {
         System.out.println("card: " + SGL_Deck.instance().getCard().toString());
         }
     }
-    
+    /*
     public void HandSum(){
         CLS_Player dummy = new CLS_Player();
+        dummy.Hands.add(new CLS_Hand());
+        
         //----------- 13 -------------------
-        dummy.Hand.add(SGL_Deck.CARD.TWO);
-        dummy.Hand.add(SGL_Deck.CARD.SIX);
-        dummy.Hand.add(SGL_Deck.CARD.FIVE);
-        dummy.calculateHand();
+        dummy.Hands.get(0).CardInHand.add(SGL_Deck.CARD.TWO);
+        dummy.Hands.get(0).CardInHand.add(SGL_Deck.CARD.SIX);
+        dummy.Hands.get(0).CardInHand.add(SGL_Deck.instance().getHideCard());
+        SGL_GameTable.Instance().calculateAllHands(dummy);
         System.out.println("player hand is: ");
-        for(int tot : dummy.TotalSum){ System.out.println(tot + " "); }
-        dummy.clear();
+        String str = "";
+        for(SGL_Deck.CARD card : dummy.Hands.get(0).CardInHand){
+          str += card.toString();
+        }
+        System.out.println(str);
+        for(int tot : dummy.Hands.get(0).TotalSum){ System.out.println(tot + " "); }
+        SGL_GameTable.Instance().clear(dummy);
+        dummy.Hands.add(new CLS_Hand());
         
         //----------- 15 -------------------
-        dummy.Hand.add(SGL_Deck.CARD.JACK);
-        dummy.Hand.add(SGL_Deck.CARD.FIVE);
-        dummy.calculateHand();
+        dummy.Hands.get(0).CardInHand.add(SGL_Deck.CARD.JACK);
+        dummy.Hands.get(0).CardInHand.add(SGL_Deck.CARD.FIVE);
+        SGL_GameTable.Instance().calculateAllHands(dummy);
         System.out.println("player hand is: ");
-        for(int tot : dummy.TotalSum){ System.out.println(tot + " "); }
-        dummy.clear();
+        for(int tot : dummy.Hands.get(0).TotalSum){ System.out.println(tot + " "); }
+        SGL_GameTable.Instance().clear(dummy);
+        dummy.Hands.add(new CLS_Hand());
         
         //----------- 20 -------------------
-        dummy.Hand.add(SGL_Deck.CARD.QUEEN);
-        dummy.Hand.add(SGL_Deck.CARD.KING);
-        dummy.calculateHand();
+        dummy.Hands.get(0).CardInHand.add(SGL_Deck.CARD.QUEEN);
+        dummy.Hands.get(0).CardInHand.add(SGL_Deck.CARD.KING);
+        SGL_GameTable.Instance().calculateAllHands(dummy);
         System.out.println("player hand is: ");
-        for(int tot : dummy.TotalSum){ System.out.println(tot + " "); }
-        dummy.clear();
+        for(int tot : dummy.Hands.get(0).TotalSum){ System.out.println(tot + " "); }
+        SGL_GameTable.Instance().clear(dummy);
+        dummy.Hands.add(new CLS_Hand());
         
         //----------- 11/21 -------------------
-        dummy.Hand.add(SGL_Deck.CARD.QUEEN);
-        dummy.Hand.add(SGL_Deck.CARD.ACE);
-        dummy.calculateHand();
+        dummy.Hands.get(0).CardInHand.add(SGL_Deck.CARD.QUEEN);
+        dummy.Hands.get(0).CardInHand.add(SGL_Deck.CARD.ACE);
+        SGL_GameTable.Instance().calculateAllHands(dummy);
         System.out.println("player hand is: ");
-        for(int tot : dummy.TotalSum){ System.out.println(tot + " "); }
-        dummy.clear();
+        for(int tot : dummy.Hands.get(0).TotalSum){ System.out.println(tot + " "); }
+        SGL_GameTable.Instance().clear(dummy);
+        dummy.Hands.add(new CLS_Hand());
         
         //----------- 16 -------------------
-        dummy.Hand.add(SGL_Deck.CARD.QUEEN);
-        dummy.Hand.add(SGL_Deck.CARD.ACE);
-        dummy.Hand.add(SGL_Deck.CARD.FOUR);
-        dummy.Hand.add(SGL_Deck.CARD.ACE);
-        dummy.calculateHand();
+        dummy.Hands.get(0).CardInHand.add(SGL_Deck.CARD.QUEEN);
+        dummy.Hands.get(0).CardInHand.add(SGL_Deck.CARD.ACE);
+        dummy.Hands.get(0).CardInHand.add(SGL_Deck.CARD.FOUR);
+        dummy.Hands.get(0).CardInHand.add(SGL_Deck.CARD.ACE);
+        SGL_GameTable.Instance().calculateAllHands(dummy);
         System.out.println("player hand is: ");
-        for(int tot : dummy.TotalSum){ System.out.println(tot + " "); }
-        dummy.clear();
-    }
-
+        for(int tot : dummy.Hands.get(0).TotalSum){ System.out.println(tot + " "); }
+        SGL_GameTable.Instance().clear(dummy);
+        dummy.Hands.add(new CLS_Hand());
+    }*/
+    
 }

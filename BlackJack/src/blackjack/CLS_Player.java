@@ -13,15 +13,15 @@ import java.util.*;
  */
 public class CLS_Player {
     private static int  Number = 0;
-    private String Name = "Player"+Number;
-    public ArrayList<SGL_Deck.CARD> Hand;
-    public ArrayList<Integer> TotalSum;
-    
+    public String Name = "Player"+Number; 
+    public int Account = 100;
+    public ArrayList<CLS_Hand> Hands;
+    public int numberOfHands = 0; 
+
     public CLS_Player(){
         Number++;      
-        Name = getCommand("#Player " + Number + " enter your name :" );  
-        Hand = new ArrayList<>();
-        TotalSum = new ArrayList<>();
+        Name = getData("enter your name :", 0);  
+        Hands = new ArrayList<>();
     }
     
     /**
@@ -29,41 +29,53 @@ public class CLS_Player {
      * @param str message to display before retrieving input
      * @return input command
      */
-    public final String getCommand(String str){
+    public final String getData(String str, int type){
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         do {
             try {
                 // use the user-interface
-                System.out.println(str);
-                return in.readLine();
+                System.out.println("#" + this.Name + " : " + str);
+                String inStr = in.readLine();
+                
+                // filter input
+                switch(type){
+                    case 0: // player name must be only letters with maximum of 8 char
+                        if (inStr.matches("[a-zA-Z]{1,8}")) return inStr;
+                        System.out.println("player name must be only letters with minimum of 1 char and maximum of 8 char !");
+                        break;
+                    case 1: // player can only bet less than chips he has
+                        if (inStr.matches("\\d+") && (Integer.parseInt(inStr) > 0) && (Integer.parseInt(inStr) <= Account)){
+                            return inStr;
+                        }
+                        System.out.println(" player can only bet number less or equal to chips he has !");
+                        break;
+                    case 2: // player available actions (1) to hit , (2) to stand, (3) to surrender , (4) to double, (5)to split
+                         if (inStr.matches("[1-5]")) return inStr;
+                         System.out.println(" unavailable cmd, enter the number cmd !");
+                        break;
+                    case 3: // player available actions (1) to hit , (2) to stand, (3) to surrender , (4) to double
+                         if (inStr.matches("[1-4]")) return inStr;
+                         System.out.println(" unavailable cmd, enter the number cmd !");
+                        break;
+                    case 4: // player available actions (1) to hit , (2) to stand, (3) to surrender
+                        if (inStr.matches("[1-3]")) return inStr;
+                        System.out.println(" unavailable cmd, enter the number cmd !");
+                        break;
+                    default:
+                        break;
+                }
+                
             }catch(IOException ex){
                 System.out.println("Invalid input retry");
             }
         }while(true);
     }
     
+    /**
+     * display msg to player UI
+     * @param str 
+     */
     public void display(String str){
-        System.out.println(str);
-    }
-    
-    public void calculateHand(){
-        TotalSum.clear();
-        int sum = 0;
-        
-        for(SGL_Deck.CARD HandCard : Hand){
-            sum += HandCard.value();
-        }
-        
-        TotalSum.add(sum);
-        if (Hand.contains(SGL_Deck.CARD.ACE) && ((sum + 10) <= SGL_Deck.instance().BLACKJACK)){
-            TotalSum.add(sum + 10);
-            
-            // sort in decreasing order to get the bigger sum at the top  
-            TotalSum.sort(Collections.reverseOrder());
-        }
-    }
-    
-    public void clear(){
-        Hand.clear();
+        System.out.println("#" + this.Name + " " + str);
     }
 }
