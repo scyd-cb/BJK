@@ -408,6 +408,7 @@ public class SGL_GameTable {
                              pendingHands = true;
                         }else{
                             //no pending hands in game, directely go to check result
+                            pendingHands = false;
                             State = SGL_GameTable.GAME_STATE.END_ROUND;
                             break;
                         }
